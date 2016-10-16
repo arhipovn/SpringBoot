@@ -1,0 +1,13 @@
+<html>
+
+<body>
+
+<p>Thank you for registering.</p>
+
+<p>Test data: ${test}</p>
+
+<p>Please click <a href="${url}/confirmregister?t=${token}">here</a> to verify your email address.
+
+</body>
+
+</html>
