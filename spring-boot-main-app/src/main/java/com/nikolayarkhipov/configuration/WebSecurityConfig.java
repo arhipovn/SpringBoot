@@ -10,22 +10,22 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.nikolayarkhipov.service.UserService;
 
+
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-
+	
 	@Autowired
 	UserService userService;
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-	
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
 		// @formatter:off
-
-
+		
 		http
 			.authorizeRequests()
 				.antMatchers(
@@ -36,7 +36,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 						"/invaliduser",
 						"/expiredtoken",
 						"/verifyemail",
-						"/confirmregister")
+						"/confirmregister"
+						)
 				.permitAll()
 				.antMatchers(
 					"/js/*",
@@ -50,8 +51,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.hasRole("ADMIN")
 				.antMatchers(
 						"/profile",
+						"/profile/*",
 						"/edit-profile-about",
-						"/upload-profile-photo"
+						"/upload-profile-photo",
+						"/profilephoto/*",
+						"/save-interest",
+						"/delete-interest"
 						)
 				.authenticated()
 				.anyRequest()
@@ -64,7 +69,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.and()
 			.logout()
 				.permitAll();
-	
+		
 		// @formatter:on
 	}
 	
@@ -81,10 +86,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		// @formatter:on
 
 	}
-	
+
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userService).passwordEncoder(passwordEncoder);
 	}
-
 }

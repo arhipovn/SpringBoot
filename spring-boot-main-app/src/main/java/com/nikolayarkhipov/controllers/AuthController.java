@@ -126,8 +126,8 @@ public class AuthController {
 
 			modelAndView.setViewName("redirect:/verifyemail");
 			
-			user.setEnabled(true);
-			userService.save(user);
+			//user.setEnabled(true);
+			//userService.save(user);
 		}
 		return modelAndView;
 	}
